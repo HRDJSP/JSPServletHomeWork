@@ -3,7 +3,7 @@ package controller.student.dto;
 public class StudentDTO {
 	int id;
 	String name;
-	
+	public StudentDTO(){}
 	public StudentDTO(int id, String name) {
 		super();
 		this.id = id;
