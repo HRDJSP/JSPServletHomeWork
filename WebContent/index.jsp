@@ -7,6 +7,35 @@
 <title>Student Information</title>
 </head>
 <body>
-
+	<center>
+	<table width="100%" rules="all">
+		<tr>
+			<th>Student ID</th>
+			<th>Student Name</th>
+			<th>Action</th>	
+		</tr>
+		<tr>
+			<td>S001</td>
+			<td>SS</td>
+			<td>Delete</td>
+		</tr>
+	</table>
+	<br>
+	<hr>
+	<br>
+		<form action="">
+			<tr>
+				<td>Student ID</td>
+				<td><input type="text" id="stu_id"></td><br/>
+			</tr>
+			<tr>
+				<td>Student ID</td>
+				<td><input type="text" id="stu_name"></td></br>
+			</tr>
+			<tr>
+				<td><input type="button" action="" value="Add" ></td>
+			</tr>
+		</form>
+	</center>
 </body>
 </html>

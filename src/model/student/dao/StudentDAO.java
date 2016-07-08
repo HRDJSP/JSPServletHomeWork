@@ -28,9 +28,9 @@ public class StudentDAO {
 
 	}
 	
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		StudentDAO  bd= new StudentDAO();
-		bd.getAllStudents();
-		
-	}
+//	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//		StudentDAO  bd= new StudentDAO();
+//		bd.getAllStudents();
+//		
+//	}
 }
