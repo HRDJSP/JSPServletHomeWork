@@ -52,9 +52,47 @@
 			<td><input type="text" id="stu_name"></td>
 		</tr>	
 		<tr>
-			<td><input type="button" action="" value="Add">	</td>
+			<td><input type="button" onClick="insert()" value="Add">	</td>
 		</tr>
 		</form>
 	</center>
 </body>
+<input type="hidden" id="url" value="${pageContext.request.contextPath}">
+<script type="text/javascript">
+	$(document).ready(function(){
+		list();
+	});
+
+	function list(){
+		/* $.ajax(function{
+			
+		}); */
+	}
+
+	 function insert()
+	{
+		var stuid = $("#stu_id").val();
+		var stuname = $("#stu_name").val();
+		var url = $("#url").val();
+		$.ajax({
+			url: url+ '/addstudent',
+			type:'POST',
+			data:{
+				id:stuid,
+				name:stuname
+			},
+			success:function(result)
+			{
+				list();
+			}
+		});
+	
+	}
+	
+
+
+
+
+
+</script>
 </html>
