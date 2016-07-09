@@ -42,18 +42,20 @@
 	<hr>
 	<br>
 		<form action="">
+		<table>
 		<tr>
 			<td><span>Student ID:</span></td>
-			<td><input type="text" id="stu_id"></td>
+			<td><input type="text" id="stu_id" placeholder="Student ID"></td>
 		</tr>
 		<br>
 		<tr>
 			<td><span>Student Name:</span></td>
-			<td><input type="text" id="stu_name"></td>
+			<td><input type="text" id="stu_name" placeholder="Student Name"></td>
 		</tr>	
 		<tr>
-			<td><input type="button" onClick="insert()" value="Add">	</td>
+			<td><input type="button" onClick="insert()" value="Add Student" width="40px" height="20px"></td>
 		</tr>
+		</table>
 		</form>
 	</center>
 </body>
@@ -63,10 +65,26 @@
 		list();
 	});
 
-	function list(){
-		/* $.ajax(function{
+	function getAllStudent(){
+		var table = "<table border='1'>"
+			+ "<tr>"
+			+ "<th>Student ID</th>"
+			+ "<th>Student Name</th>";
+
+		$.getJSON(base_url + "/array", function(result){
+			for(var i= 0; i<result.length; i++){
+				
+				table += "<tr>";
+				table += "<td>" + result[i].username + "</td>";
+				table += "<td>" + result[i].password + "</td>";
+				table += "</tr>";
+			}
 			
-		}); */
+			table += "</table>";
+			// append table to div
+			//$("#display").append(table);
+			
+		});
 	}
 
 	 function insert()
