@@ -25,20 +25,19 @@ public class StudentDAO {
 			
 		}
 		return students;
-
 	}
-	
+	public int getIdex( int index){
+		
+		return index;
+	}
 	//insert data
 	public boolean addStudents(StudentDTO student) throws ClassNotFoundException, SQLException{
 		Connection cnn =ConnectionManager.getConnection();
-		cnn.setAutoCommit(false);
 		PreparedStatement pstmt =cnn.prepareStatement("INSERT INTO tbstudent VALUES(?,?)");
 		pstmt.setInt(1, student.getId());
 		pstmt.setString(2, student.getName());
-		cnn.commit();
 		if(pstmt.executeUpdate()>0)
-			return true;
-		
+			return true;	
 		return false;		
 	}
 	
@@ -54,15 +53,22 @@ public class StudentDAO {
 		return false;
 	}
 	
-	public void DeleteStudent() throws ClassNotFoundException, SQLException{
+	public boolean deleteStudent(int id) throws ClassNotFoundException, SQLException{
 		Connection  cnn =ConnectionManager.getConnection();
-		
-		
+		StudentDTO  studentdto = new StudentDTO();
+		try{
+			PreparedStatement pstmt =cnn.prepareStatement("DELETE FROM tbstudent WHERE stu_id=?");
+			pstmt.setInt(1, id);	
+			pstmt.executeUpdate();
+				return true;
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return false;
 	}
-	
-//	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//		StudentDAO  bd= new StudentDAO();
-//		bd.getAllStudents();
-//		
-//	}
+	// database manipulate data
+	public static void main(String[] args) {
+			//StudentDAO  dao = new /// WHAT iS PROBLEM?.  i can not using ajax for 
+					//delete and update from servlet , it problem code in ajax oh
+	}
 }

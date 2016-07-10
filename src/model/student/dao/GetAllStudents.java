@@ -1,7 +1,6 @@
 package model.student.dao;
-
+import java.io.*;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
-import com.google.gson.Gson;
-
-import configuration.ConnectionManager;
 import controller.student.dto.StudentDTO;
 
 /**
