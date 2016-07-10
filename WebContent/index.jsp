@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,86 +10,82 @@
 <title>Student Information</title>
 	<style type="text/css">
 		form{
-			width: 500px;
-			height:300px;
 			margin: auto;
-			border: 1px solid black;
-			
+			margin-left: 0px;
 		}
 		span{
-			font-size: 25px;
+			font-size: 16px;
 			margin-left: 0px;
 			float:left;
 		}
-		input{
-			margin-left: 50px;
+		#container{
+			margin: auto;
+			margin-left: 20%;
 		}
 	</style>
 </head>
 <body>
-	<center>
-	<table width="100%" rules="all">
-		<tr>
-			<th>Student ID</th>
-			<th>Student Name</th>
-			<th>Action</th>	
-		</tr>
-		<tr>
-			<td>S001</td>
-			<td>SS</td>
-			<td>Delete</td>
-		</tr>
-	</table>
-	<br>
-	<hr>
-	<br>
-		<form action="">
+<div id="container">
+
+
+	<h2>Student Information</h2>
+	<form action="">
 		<table>
 		<tr>
 			<td><span>Student ID:</span></td>
 			<td><input type="text" id="stu_id" placeholder="Student ID"></td>
 		</tr>
-		<br>
+		
 		<tr>
 			<td><span>Student Name:</span></td>
 			<td><input type="text" id="stu_name" placeholder="Student Name"></td>
 		</tr>	
 		<tr>
-			<td><input type="button" onClick="insert()" value="Add Student" width="40px" height="20px"></td>
+			<td><input type="button" onClick="insert()" value="Add"></td>
 		</tr>
 		</table>
-		</form>
-	</center>
+	</form>
+	<div id="display">
+		
+	</div>
+</div>
 </body>
 <input type="hidden" id="url" value="${pageContext.request.contextPath}">
 <script type="text/javascript">
-	$(document).ready(function(){
-		list();
-	});
 
-	function getAllStudent(){
-		var table = "<table border='1'>"
-			+ "<tr>"
-			+ "<th>Student ID</th>"
-			+ "<th>Student Name</th>";
+$(document).ready(function(){
+	getAllStudents();
+	
+});
 
-		$.getJSON(base_url + "/array", function(result){
-			for(var i= 0; i<result.length; i++){
-				
-				table += "<tr>";
-				table += "<td>" + result[i].username + "</td>";
-				table += "<td>" + result[i].password + "</td>";
-				table += "</tr>";
-			}
+
+	function getAllStudents(){
+		
+		var url = $("#url").val();
+		var table = "<table border='1'>";
+			table += "<tr>";
+			table += "<td>Student ID</td><td>Student Name</td><td>Action</td>";
+			table += "</tr>"; 
 			
-			table += "</table>";
-			// append table to div
-			//$("#display").append(table);
-			
-		});
+			$.ajax({
+				url: url+ '/getallstudents',
+				success:function(result)
+				{
+					for(var i =0 ; i<result.length ;i++){
+						table +="<tr>";
+						table +="<td>"+result[i].id+ "</td>";
+						table +="<td>"+result[i].name+"</td>";
+						table +="<td><input type='button' onClick='Edit()' value='Edite'>/<input type='button' onClick='Delete()' value='Delete'></td>";
+						table +="</tr>";
+					}
+				table +="</table>";
+				$('#display').append(table);
+				}
+			});
 	}
-
-	 function insert()
+	
+	//function insert data from form
+	function insert()
 	{
 		var stuid = $("#stu_id").val();
 		var stuname = $("#stu_name").val();
@@ -101,11 +99,22 @@
 			},
 			success:function(result)
 			{
-				list();
+				alert(result)
+				
 			}
 		});
 	
 	}
+	
+	//function edit data
+	function Edit(){
+		
+	}
+		
+	function Delete(){
+		alert("Delte");
+	}
+
 	
 
 
